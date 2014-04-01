@@ -1,0 +1,100 @@
+0.  // How many different colors does each format support?
+    Both .bmp and .jpg file formats support three colors: Red, Green, & Blue.
+    
+1.  // Which of these formats supports animation?
+    Neither .bmp nor .jpg supports animation.
+    
+2.  // What’s the difference between lossy and lossless compression?
+    Essentially, lossless compression breaks down a file "as is", so to speak,
+    into smaller, more manageable components for the sake of storage/archival
+    or transmission.  As the name implies, none of the original data is lost.
+    Lossy compression, however, attempts to eliminate redundancies in information,
+    and, therefore, the new file will be an "interpretation" of sorts from what
+    the original file used to be.
+    
+3.  // Which of these formats is lossy-compressed?
+    JPEG files use a form of lossy compression known as Discrete Cosine Transforms.
+    (DCT).  It is somewhat akin to a Laplace Transform in functionality.
+    
+4.  // What happens, technically speaking, when a file is deleted on a FAT file system?
+    The linked list of data clusters that the DOS had used to allocate to the given 
+    file is no longer assigned to the file, and becomes "garbage" values to be reallocated
+    when needed again in the future.  Until then, such information can potentially lie
+    dormant on a computer for and indefinite period of time.
+    
+5.  // What can someone like you do to ensure (with high probability) that files you delete cannot be recovered?
+    In a somewhat trivial answer, one can always physically destroy the hardware.
+    Beyond that, there are some additional sanitization techniques, including degaussing 
+    and disk overwriting.
+    
+6.  // What’s stdint.h?
+    stdint.h is the header file referenced in bmp.h.  It defines the minimum and maximum
+    sizes of, amongst other values, uint8_t, uint32_t, int32_t, and uint16_t.
+    
+7.  // What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+        /* uint8_t
+        This typedef will hold an 8-bit integer whose first, or Most Significant Bit (MSB)
+        is unsigned.
+        
+        /* uint32_t.
+        This typedef will hold a 32-bit integer whose MSB is unsigned.
+        
+        /* int32_t.
+        This typedef will hold a signed 32-bit integer, wherein the MSB denotes its beginning.
+        
+        /* uint16_t.
+        This typedef will hold an unsigned 16-bit integer.
+        
+8.  // How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+        /* BYTE
+        One octet, or eight (unsigned) bits. (One byte)
+        
+        /* DWORD
+        32-bits (four bytes); unsigned.
+        
+        /* LONG
+        32-bits (four bytes); MSB is signed.
+        
+        /* WORD
+        16-bits (two bytes); unsigned.
+        
+9.  // What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? 
+    /*(Leading bytes used to identify file formats (with high probability) are generally called "magic numbers.)"
+    0x42 0x4D in hexadecimal, same as BM in ASCII, or 66; 77.
+    
+10. // What’s the difference between bfSize and biSize?
+    bfSize is the size of the bitmap file in bytes.  biSize is the number of bytes required by the structure.
+    
+11. // What does it mean if biHeight is negative?
+    If biHeight is negative, the bitmap is a top-down DIB and its origin is the upper-left corner.  In addition,
+    if biHeight is negative, biCompression must be either BI_RGB or BI_BITFIELDS.
+     
+12. // What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+    (WORD) biBitCount;
+    
+13. // Why might fopen return NULL in copy.c:37?
+    if the variable defined in copy.c:26 is NULL, then fopen would return NULL.  This would
+    be the case if argv[2] == NULL (i.e., if "outfile" was missing in the command line input
+    due to improper command line structure input by the user.  The program is expecting the
+    usage: ./copy infile outfile.
+    
+14. // Why is the third argument to fread always 1 in our code?
+    There is only 1 element of data to read (or "fread", so to speak) at any given time
+    for this program. It should be noted that although there is only one element of 
+    data, the size of that element is determined by the second argument of fread.
+           
+15. // What value does copy.c:70 assign padding if bi.biWidth is 3?
+    padding == 3.  This is based off of the formula:
+    int padding =  (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    with bi.biWidth == 3 && sizeof(RGBTRIPLE) == 3.
+    
+    
+16. // What does fseek do?
+    For a stream FILE (a file that reads image pixels), fseek sets the file position
+    indicator.
+    
+17. // What is SEEK_CUR?
+    Within the function fseek, SEEK_CUR is the file position indicator's current position.
+     
+18. // Whodunit?
+    Milo Banana dun it.
